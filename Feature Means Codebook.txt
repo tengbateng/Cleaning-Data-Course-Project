@@ -1,0 +1,90 @@
+======================
+FEATURE MEANS CODEBOOK
+=======================
+
+This file describes the variables of the run_analysis.R output file, feature_means.txt
+
+Feature means has 68 variables. Two of these are subject and activity identifiers, and the remaining 66 are averaged mean and standard deviation measures.
+
+activity and subject are the table identifiers-- there should only be one row for each subject and activity pair.
+
+Below are detailed descriptions of the variables:
+
+
+-----------------------
+DESCRIPTIVE VARIABLES
+----------------------
+1. subject
+
+Type: int
+Description:
+This variable indicates the subject who performed the activity, and from whom the measurements were taken. These are just numerical identifiers ranging from 1-30. These identifiers are unchanged from the original UCI HAR dataset.
+
+2. activity
+
+Type: factor
+Description:
+This variable describes the activity for which the measurements were taken. The factor levels for this variable are based on the source data, but factorized to include the labels of each activity to make the data more readable. 
+The factor levels are as follows*:
+
+Level	Label
+1 	WALKING
+
+2 	WALKING_UPSTAIRS
+
+3 	WALKING_DOWNSTAIRS
+
+4 	SITTING
+5 STANDING
+
+6 	LAYING
+
+
+*The factor levels were taken from source text data file UCI HAR Dataset/activity_labels.txt
+
+-----------------
+MEASURE VARIABLES
+-----------------
+
+The succeeding 66 variables are measurements derived from the original HAR source data. In the original HAR study, multiple measurements were taken per measure (or feature) subject and activity. In feature_means.txt, each measurement variable is an average of the aforementioned multiple measurements per subject and activity. These averages were taken using the command below:
+
+aggregate(. ~subject + activity, merged_dat, mean)
+
+where merged_dat is the merged train and test data.
+
+
+A prefix of "ave-" has been appended to the variables, but otherwise the nomenclature was retained from the source data to allow traceability to the original measures. 
+
+Below is a description of the variables taken from the original source data description (UCI HAR Dataset/feature_info.txt):
+---------------------------------------------------------------------------------------------------------------------------
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+
+The set of variables that were estimated from these signals are: 
+
+mean(): Mean value
+std(): Standard deviation
